@@ -61,12 +61,15 @@ function! yet_another_python_indent#PythonIndent()
             " Prev line ends with a brackent, this line should be
             " one indent bigger than the previous line
             let s:this_line_indent = prev_line_indent + &shiftwidth
-        elseif line =~ '^\s*\(return\|break\|continue\)\s*\(#.*\)\?$'
-            " Prev line starts with `return`, this line should be
-            " one indent smaller than the previous line
+        elseif line =~ '^\s*\(return\|break\|continue\|raise\>\)\s*\(#.*\)\?$'
+            " Prev line starts with a scope-terminating keyword, this line should be
+            " one indent smaller than the previous line. Note in the regex
+            " That we're using the terminating word boundary '\>' to match
+            " the end of the keyword.
             let s:this_line_indent = prev_line_indent - &shiftwidth
         else
             " Indent the current line, update the `this_line_indent` var
+            " (uses autoindent)
             let s:this_line_indent = -1
         endif
     endif
