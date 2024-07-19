@@ -11,8 +11,6 @@ function! yet_another_python_indent#PythonIndent()
     "
     " This function tries to do the bare minimum for the most
     " common situations when trying to code Python. It handles
-    " These situations:
-    " - after a colon, indent the next line
 
     function! WriteLog(line)
         " if the log file has been set, then do logging
